@@ -1,6 +1,6 @@
 {
   "name": "admeta-monetize",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "Turn an AI app into a monetized AI app.",
   "type": "module",

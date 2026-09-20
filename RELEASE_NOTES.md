@@ -38,14 +38,10 @@ npx @admeta/cli@0.1.0 verify .
 - [x] `npm run test:pack`
 - [x] npm package manifests set to `0.1.0` with public access configuration
 - [x] OIDC workflow requests npm provenance
-- [ ] Confirm ownership of the `@admeta` npm organization and package names
-- [ ] Configure npm Trusted Publishing for both packages
-- [ ] Create GitHub release `v0.1.0` using these notes
+- [x] Confirm ownership of the `@admeta` npm organization and package names
+- [x] Configure npm Trusted Publishing for both packages
+- [x] Create GitHub release `v0.1.0` using these notes
 
 ## One-time npm setup before publishing
 
-1. Sign in to npm with the account that will own the public `@admeta` organization, then create or confirm that organization and grant this account publish access.
-2. Confirm that `@admeta/sdk` and `@admeta/cli` are available to that organization. This environment is not authenticated, so no ownership check or publish was attempted.
-3. On npmjs.com, open each package's **Settings → Trusted publishing**, choose **GitHub Actions**, and configure: organization `AdMetaNetwork`, repository `admeta-monetize`, workflow filename `publish.yml`, environment `npm-publish`, and allow direct `npm publish`.
-4. Review the Linux Foundation Immutable Record notice shown by npm. Do not add an npm write token to GitHub: the prepared workflow uses OIDC (`id-token: write`) and publishes from a GitHub-hosted runner.
-5. Create the GitHub release `v0.1.0`. The release-published event runs the workflow and npm automatically creates the provenance attestation for the public packages.
+The first public package versions are now live. npm requires a package to exist before a Trusted Publisher can be attached, so the OIDC-and-provenance `v0.1.1` patch follows this bootstrap release. No npm write token is stored in GitHub.

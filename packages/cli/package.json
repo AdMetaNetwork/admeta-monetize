@@ -1,6 +1,6 @@
 {
   "name": "@admeta/cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Install and verify transparent admeta monetize integrations.",
   "license": "MIT",
   "repository": {

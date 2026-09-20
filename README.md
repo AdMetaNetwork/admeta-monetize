@@ -32,14 +32,14 @@ v0.1 ships as two packages:
 After the authorized v0.1.0 npm release, install the Skill from any terminal:
 
 ```bash
-npx @admeta/cli@0.1.0 install
+npx @admeta/cli@0.1.1 install
 ```
 
 Restart Codex after installation. In a supported Next.js + Vercel AI SDK project, run a compatibility check and write the minimal configuration:
 
 ```bash
-npx @admeta/cli@0.1.0 doctor .
-npx @admeta/cli@0.1.0 init .
+npx @admeta/cli@0.1.1 doctor .
+npx @admeta/cli@0.1.1 init .
 ```
 
 Then ask Codex:
@@ -51,7 +51,7 @@ monetize this agent
 The Skill semantically understands the repository, chooses one appropriate recommendation flow, adds the application-specific `SponsoredOffer` UI, and installs `@admeta/sdk` with the app's package manager. Verify the finished patch deterministically:
 
 ```bash
-npx @admeta/cli@0.1.0 verify .
+npx @admeta/cli@0.1.1 verify .
 ```
 
 `@admeta/cli` does not generate a generic UI or replace Codex's integration judgment. `@admeta/sdk` does not provide advertiser supply or a network. Generated source remains owned by the application team.
