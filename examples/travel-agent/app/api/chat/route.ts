@@ -1,0 +1,15 @@
+import { convertToModelMessages, streamText, type UIMessage } from 'ai';
+
+export const maxDuration = 30;
+
+export async function POST(request: Request) {
+  const { messages }: { messages: UIMessage[] } = await request.json();
+  const result = streamText({
+    model: 'openai/gpt-6-astra',
+    system:
+      'You are Roam, a concise travel assistant. Give a useful organic recommendation first. Do not invent sponsorships, affiliate relationships, prices, or commercial claims.',
+    messages: await convertToModelMessages(messages),
+  });
+
+  return result.toUIMessageStreamResponse();
+}

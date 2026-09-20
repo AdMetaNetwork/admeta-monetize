@@ -1,0 +1,12 @@
+{
+  "name": "admeta-monetize",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Turn an AI app into a monetized AI app.",
+  "scripts": {
+    "verify": "node scripts/verify.mjs",
+    "demo": "npm --prefix examples/travel-agent run dev",
+    "build:demo": "npm --prefix examples/travel-agent run build"
+  },
+  "license": "MIT"
+}
