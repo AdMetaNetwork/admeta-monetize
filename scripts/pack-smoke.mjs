@@ -30,6 +30,18 @@ function tarEntries(tarball) {
   return run('tar', ['-tzf', tarball]).trim().split(/\r?\n/);
 }
 
+function publishDryRun(workspace) {
+  return run('npm', [
+    'publish',
+    '--workspace',
+    workspace,
+    '--access',
+    'public',
+    '--provenance=false',
+    '--dry-run',
+  ]);
+}
+
 try {
   await mkdir(tarballDirectory, { recursive: true });
   const sdkTarball = pack('@admeta/sdk');
@@ -41,6 +53,11 @@ try {
   assert(sdkEntries.includes('package/dist/index.d.ts'));
   assert(cliEntries.includes('package/bin/admeta.mjs'));
   assert(cliEntries.includes('package/skill/SKILL.md'));
+  assert.doesNotMatch(
+    publishDryRun('@admeta/cli'),
+    /bin\[admeta\].*invalid and removed/,
+    'npm would remove the CLI executable from the published manifest',
+  );
   for (const entry of [...sdkEntries, ...cliEntries]) {
     assert(!entry.includes('node_modules/'), `tarball leaked node_modules: ${entry}`);
     assert(!/\.env($|\.)/.test(entry), `tarball leaked environment file: ${entry}`);

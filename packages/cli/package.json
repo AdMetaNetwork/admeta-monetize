@@ -12,7 +12,7 @@
   "bugs": "https://github.com/AdMetaNetwork/admeta-monetize/issues",
   "type": "module",
   "bin": {
-    "admeta": "./bin/admeta.mjs"
+    "admeta": "bin/admeta.mjs"
   },
   "files": [
     "bin",

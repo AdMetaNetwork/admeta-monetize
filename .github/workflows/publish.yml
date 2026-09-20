@@ -19,13 +19,27 @@ jobs:
     runs-on: ubuntu-latest
     environment: npm-publish
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org
       - run: npm ci
       - run: npm test
       - run: npm run test:pack
-      - run: npm publish --workspace @admeta/sdk --provenance --access public
-      - run: npm publish --workspace @admeta/cli --provenance --access public
+      - name: Publish SDK when its version is not already on npm
+        run: |
+          VERSION=$(node -p "require('./packages/sdk/package.json').version")
+          if npm view "@admeta/sdk@$VERSION" version >/dev/null 2>&1; then
+            echo "@admeta/sdk@$VERSION is already published; skipping."
+          else
+            npm publish --workspace @admeta/sdk --provenance --access public
+          fi
+      - name: Publish CLI when its version is not already on npm
+        run: |
+          VERSION=$(node -p "require('./packages/cli/package.json').version")
+          if npm view "@admeta/cli@$VERSION" version >/dev/null 2>&1; then
+            echo "@admeta/cli@$VERSION is already published; skipping."
+          else
+            npm publish --workspace @admeta/cli --provenance --access public
+          fi
