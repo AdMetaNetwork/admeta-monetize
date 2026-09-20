@@ -11,7 +11,7 @@ const required = {
   config: 'admeta.config.ts',
   offers: 'lib/admeta/offers.ts',
   receipts: 'lib/admeta/receipts.ts',
-  component: 'components/SponsoredOffer.tsx',
+  component: ['components/SponsoredOffer.tsx', 'components/sponsored-offer.tsx'],
   clickRoute: 'app/api/admeta/click/route.ts',
 };
 
@@ -29,12 +29,21 @@ async function exists(relativePath) {
 }
 
 const filesExist = Object.fromEntries(
-  await Promise.all(Object.entries(required).map(async ([key, file]) => [key, await exists(file)])),
+  await Promise.all(
+    Object.entries(required).map(async ([key, file]) => {
+      const candidates = Array.isArray(file) ? file : [file];
+      return [key, (await Promise.all(candidates.map(exists))).some(Boolean)];
+    }),
+  ),
 );
 
 const source = {};
 for (const [key, file] of Object.entries(required)) {
-  source[key] = filesExist[key] ? await text(file) : '';
+  const candidates = Array.isArray(file) ? file : [file];
+  const matched = (
+    await Promise.all(candidates.map(async candidate => [candidate, await exists(candidate)]))
+  ).find(([, present]) => present)?.[0];
+  source[key] = matched ? await text(matched) : '';
 }
 
 const checks = [

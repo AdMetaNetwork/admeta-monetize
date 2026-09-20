@@ -10,6 +10,18 @@ AdMeta Monetize is an open-source Codex skill that finds a commercial recommenda
 
 It does not pretend that a network or advertiser supply already exists. Sandbox uses a clearly fictional offer. BYO lets a developer connect a destination they already control, with no AdMeta commission.
 
+## Real-world demo: Vercel Chatbot
+
+![AdMeta Monetize applied to Vercel Chatbot](assets/vercel-chatbot-demo.gif)
+
+We started from a clean checkout of [Vercel's open-source Chatbot](https://github.com/vercel/chatbot), verified its baseline build, then applied this skill to its existing chat experience. The resulting eSIM recommendation preserves the useful organic answer, adds a visible `Sponsored · Sandbox` DemoSIM option, and writes a click receipt before opening the local offer screen.
+
+The full recording is available as [MP4](assets/vercel-chatbot-demo.mp4); its [poster frame](assets/vercel-chatbot-demo-poster.png) shows the applied interface. Both the baseline and patched application builds passed, and the patched checkout passed the deterministic verifier.
+
+> Demo uses Vercel's open-source Chatbot project. AdMeta is not affiliated with or endorsed by Vercel.
+
+The recording uses Chatbot's existing local test-model fixture so the interaction is repeatable. The demonstration makes no claim that Vercel uses, supports, or distributes AdMeta.
+
 ## Install
 
 Install directly from this repository with the Codex skill installer, or copy the repository into your Codex skills directory:
