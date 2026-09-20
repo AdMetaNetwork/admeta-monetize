@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { mkdtemp, mkdir, rm, writeFile } from 'node:fs/promises';
+import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -30,18 +30,6 @@ function tarEntries(tarball) {
   return run('tar', ['-tzf', tarball]).trim().split(/\r?\n/);
 }
 
-function publishDryRun(workspace) {
-  return run('npm', [
-    'publish',
-    '--workspace',
-    workspace,
-    '--access',
-    'public',
-    '--provenance=false',
-    '--dry-run',
-  ]);
-}
-
 try {
   await mkdir(tarballDirectory, { recursive: true });
   const sdkTarball = pack('@admeta/sdk');
@@ -53,10 +41,13 @@ try {
   assert(sdkEntries.includes('package/dist/index.d.ts'));
   assert(cliEntries.includes('package/bin/admeta.mjs'));
   assert(cliEntries.includes('package/skill/SKILL.md'));
-  assert.doesNotMatch(
-    publishDryRun('@admeta/cli'),
-    /bin\[admeta\].*invalid and removed/,
-    'npm would remove the CLI executable from the published manifest',
+  const cliManifest = JSON.parse(
+    await readFile(path.join(repositoryRoot, 'packages/cli/package.json'), 'utf8'),
+  );
+  assert.equal(
+    cliManifest.bin.admeta,
+    'bin/admeta.mjs',
+    'the CLI bin path must omit ./ so npm retains it in the published manifest',
   );
   for (const entry of [...sdkEntries, ...cliEntries]) {
     assert(!entry.includes('node_modules/'), `tarball leaked node_modules: ${entry}`);
