@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Roam — AdMeta Travel Agent Demo',
+  title: 'Roam — admeta travel agent demo',
   description: 'A transparent sponsored-offer demo for an AI travel assistant.',
 };
 

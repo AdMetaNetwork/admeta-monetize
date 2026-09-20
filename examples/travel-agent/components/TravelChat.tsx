@@ -81,7 +81,7 @@ export function TravelChat({ offer, clickCount }: { offer: DisplayOffer | null; 
       </section>
 
       <aside className="developer-panel">
-        <div className="sandbox-heading"><span className="pulse" /> AdMeta Sandbox</div>
+        <div className="sandbox-heading"><span className="pulse" /> admeta Sandbox</div>
         <p className="sandbox-copy">Local commercial interaction telemetry</p>
         <dl className="metrics">
           <div><dt>Impressions</dt><dd>{offer ? 1 : 0}</dd></div>
@@ -93,7 +93,7 @@ export function TravelChat({ offer, clickCount }: { offer: DisplayOffer | null; 
           <p>Latest event</p>
           <code>{clickCount > 0 ? 'click.receipt_created' : 'offer.impression'}</code>
         </div>
-        <p className="connect-note">Connect a live offer provider to start earning.</p>
+        <p className="connect-note">Sandbox is fictional. Use BYO only with a real commercial relationship.</p>
       </aside>
     </div>
   );

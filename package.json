@@ -3,10 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "description": "Turn an AI app into a monetized AI app.",
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run build && npm run test --workspaces --if-present && npm run verify",
+    "test:pack": "node scripts/pack-smoke.mjs",
     "verify": "node scripts/verify.mjs",
     "demo": "npm --prefix examples/travel-agent run dev",
     "build:demo": "npm --prefix examples/travel-agent run build"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
 }

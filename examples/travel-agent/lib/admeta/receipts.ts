@@ -1,22 +1,17 @@
 import { appendFile, mkdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { randomUUID } from 'node:crypto';
 import { admetaConfig } from '@/admeta.config';
+import { createCommercialInteractionReceipt } from '@admeta/sdk';
 import type { CommercialInteractionReceipt, ServerOffer } from './types';
 
 const receiptDirectory = path.join(process.cwd(), '.admeta');
 const receiptFile = path.join(receiptDirectory, 'receipts.ndjson');
 
 export async function createClickReceipt(offer: ServerOffer) {
-  const receipt: CommercialInteractionReceipt = {
-    receipt_id: randomUUID(),
+  const receipt: CommercialInteractionReceipt = createCommercialInteractionReceipt({
     publisher: admetaConfig.publisher,
-    offer_id: offer.id,
-    intent: offer.intent,
-    surface: offer.surface,
-    event: 'click',
-    timestamp: new Date().toISOString(),
-  };
+    offer,
+  });
 
   await mkdir(receiptDirectory, { recursive: true });
   await appendFile(receiptFile, `${JSON.stringify(receipt)}\n`, 'utf8');

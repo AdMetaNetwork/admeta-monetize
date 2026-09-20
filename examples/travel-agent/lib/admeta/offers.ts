@@ -1,16 +1,12 @@
 import { admetaConfig } from '@/admeta.config';
+import { createSandboxOffer, isHttpsUrl } from '@admeta/sdk';
 import type { DisplayOffer, ServerOffer } from './types';
 
-const sandboxOffer: ServerOffer = {
-  id: 'demosim-europe-10gb',
-  advertiser: 'DemoSIM',
-  title: 'Europe 10 GB',
-  price: '€18',
-  mode: 'sandbox',
+const sandboxOffer: ServerOffer = createSandboxOffer({
   destinationUrl: new URL('http://localhost:3000/demo/offer'),
   intent: 'esim-recommendation',
   surface: 'travel-agent-chat',
-};
+});
 
 function byoOffer(): ServerOffer | null {
   const value = process.env.ADMETA_BYO_OFFER_URL;
@@ -18,7 +14,7 @@ function byoOffer(): ServerOffer | null {
 
   try {
     const destinationUrl = new URL(value);
-    if (destinationUrl.protocol !== 'https:') return null;
+    if (!isHttpsUrl(destinationUrl)) return null;
     return { ...sandboxOffer, id: 'publisher-byo-esim', mode: 'byo', destinationUrl };
   } catch {
     return null;

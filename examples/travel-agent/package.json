@@ -9,6 +9,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@admeta/sdk": "file:../../packages/sdk",
     "@ai-sdk/react": "^4.0.110",
     "ai": "^6.0.34",
     "next": "^16.1.6",

@@ -1,0 +1,36 @@
+{
+  "name": "@admeta/cli",
+  "version": "0.1.0",
+  "description": "Install and verify transparent admeta monetize integrations.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdMetaNetwork/admeta-monetize.git",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://github.com/AdMetaNetwork/admeta-monetize#readme",
+  "bugs": "https://github.com/AdMetaNetwork/admeta-monetize/issues",
+  "type": "module",
+  "bin": {
+    "admeta": "./bin/admeta.mjs"
+  },
+  "files": [
+    "bin",
+    "src",
+    "skill",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "sync-skill": "node scripts/sync-skill.mjs",
+    "test": "npm run sync-skill && node --test test/*.test.mjs",
+    "prepack": "npm run sync-skill"
+  }
+}

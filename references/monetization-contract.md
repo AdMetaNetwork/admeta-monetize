@@ -30,11 +30,11 @@ The destination may be a local demo confirmation page or a non-commercial docume
 
 ### BYO
 
-BYO uses a server-only `ADMETA_BYO_OFFER_URL`. The developer owns the commercial relationship; AdMeta takes no commission. Validate the URL as `https:` before enabling the offer. Keep it out of client props and client bundles: the browser receives only the local `/api/admeta/click` attribution URL.
+BYO uses a server-only `ADMETA_BYO_OFFER_URL`. The developer owns the commercial relationship; admeta takes no commission. Validate the URL as `https:` before enabling the offer. Keep it out of client props and client bundles: the browser receives only the local `/api/admeta/click` attribution URL.
 
 ### Network
 
-Treat AdMeta Network as `Coming soon`. Do not implement provider supply.
+Treat admeta Network as `Coming soon`. Do not implement provider supply.
 
 ## Receipt
 

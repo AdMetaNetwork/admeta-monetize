@@ -5,3 +5,6 @@ node_modules/
 .admeta/
 .DS_Store
 npm-debug.log*
+*.tgz
+*.tsbuildinfo
+packages/cli/skill/

@@ -1,12 +1,6 @@
-type SponsoredOfferProps = {
-  offer: {
-    advertiser: string;
-    title: string;
-    price: string;
-    clickUrl: string;
-    mode: 'sandbox' | 'byo';
-  };
-};
+import type { DisplayOffer } from '@admeta/sdk';
+
+type SponsoredOfferProps = { offer: DisplayOffer };
 
 export function SponsoredOffer({ offer }: SponsoredOfferProps) {
   return (

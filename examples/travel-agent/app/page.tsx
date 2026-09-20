@@ -11,9 +11,9 @@ export default async function Home() {
     <main>
       <div className="page-intro">
         <a className="admeta-wordmark" href="https://github.com/AdMetaNetwork/admeta-monetize">
-          <span>AD</span>META
+          <span>ad</span>meta
         </a>
-        <div className="mode-pill"><i /> Monetized with AdMeta</div>
+        <div className="mode-pill"><i /> Monetized with admeta</div>
       </div>
       <TravelChat offer={offer} clickCount={clickCount} />
       <p className="demo-caption">A useful organic answer, plus one clearly disclosed commercial option.</p>
